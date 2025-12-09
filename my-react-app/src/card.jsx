@@ -7,7 +7,8 @@ function Card() {
     marginBottom: "20px",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    display: "block"
   };
 
   return (

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 // ✅ USE ES6 DEFAULT PARAMETERS FOR FUNCTIONAL COMPONENTS
-function Props({ name = "guest", age = 10, isStudent = true }) {
+export function Props({ name = "guest", age = 10, isStudent = true }) {
   return (
     <div className="student">
       {/* This is necessary because if a prop is not passed, it is undefined.
@@ -24,4 +24,14 @@ Props.propTypes = {
   isStudent: PropTypes.bool,
 };
 
-export default Props;
+
+// conditional rendering
+export function UserGreeting(props){
+
+    return(props.isLoggedIn ? <h2> Welcome {props.username}</h2>: <h2>please log in to continue</h2>);
+
+}
+UserGreeting.propTypes = {
+  username: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
+};

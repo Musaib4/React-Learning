@@ -1,18 +1,26 @@
 import PropTypes from "prop-types";
 
-function List({ list }) {
+function List( props ) {
+
+  const category = props.category
+  const itemList = props.items
+
+  const listItem = itemList.map(item => 
+        <li key={item.id}>{item.name} : {item.calories}</li>
+      )
+
   return (
-    <ul>
-      {list.map((item) => (
-        <li key={item.id}>{item.name} : {item.calories} : {item.category}</li>
-      ))}
-    </ul>
+    <>
+    <h3>{category}</h3>
+    <ol>{listItem}</ol>
+    </>
+    
   );
 }
 
 // PropTypes validation
 List.propTypes = {
-  list: PropTypes.arrayOf(
+  itemList: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
       name: PropTypes.string.isRequired,

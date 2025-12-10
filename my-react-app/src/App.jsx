@@ -24,8 +24,8 @@ function App() {
     <>
       <UserGreeting isLoggedIn = {true} username ="musaib"/>
       <Header></Header>
-      <List list = {Fruit}  />
-      <List list = {veg} />
+      <List items = {Fruit} category ="Fruit" />
+      <List items = {veg}  category = "veg"/>
       <Props />
       <Card></Card>
       <Footer></Footer>

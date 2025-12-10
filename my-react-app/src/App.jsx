@@ -3,7 +3,7 @@ import Footer from './footer.jsx'
 import Card from './card.jsx'
 import List from './list.jsx'
 import { UserGreeting, Props } from "./props.jsx";
-
+import {Button1, Football, Football1} from './button.jsx'
 
 function App() {
 
@@ -24,8 +24,11 @@ function App() {
     <>
       <UserGreeting isLoggedIn = {true} username ="musaib"/>
       <Header></Header>
-      <List items = {Fruit} category ="Fruit" />
-      <List items = {veg}  category = "veg"/>
+      {Fruit.length>0 && <List items = {Fruit} category ="Fruit" />}
+      {veg.length>0 &&<List items = {veg}  category = "veg"/>}
+      <Button1></Button1>
+      <Football />
+      <Football1 />
       <Props />
       <Card></Card>
       <Footer></Footer>

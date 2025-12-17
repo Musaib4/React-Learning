@@ -6,7 +6,7 @@ import { UserGreeting, Props } from "./props.jsx";
 import {Button1, Football, Football1} from './button.jsx'
 import {Counter,NameInput,Toggle,list,User} from './useState.jsx'
 import onChange from './onChange.jsx';
-import {UpdateCounter,Profile} from './updaterFunc.jsx';
+import {UpdateArray,UpdateCounter,Profile} from './updaterFunc.jsx';
 
 function App() {
 
@@ -27,6 +27,7 @@ function App() {
     <>
       <UserGreeting isLoggedIn = {true} username ="musaib"/>
       <Header></Header>
+      <UpdateArray/>
       {Fruit.length>0 && <List items = {Fruit} category ="Fruit" />}
       {veg.length>0 &&<List items = {veg}  category = "veg"/>}
       <Button1></Button1>

@@ -57,3 +57,110 @@ export function Profile() {
 }
 
 
+export function UpdateArray() {
+  // 1 Simple array
+  const [fruits, setFruits] = useState(["Apple", "Banana"]);
+
+  // 2 Array of objects
+  const [users, setUsers] = useState([
+    { id: 1, name: "Musab" },
+    { id: 2, name: "Ali" }
+  ]);
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>🍎 Fruits</h2>
+
+      {/* Display fruits */}
+      <ul>
+        {fruits.map((fruit, index) => (
+          <li key={index}>{fruit}</li>
+        ))}
+      </ul>
+
+      {/* Add item */}
+      <button onClick={() => setFruits(prev => [...prev, "Mango"])}>
+        Add Mango
+      </button>
+
+      {/* Remove item */}
+      <button
+        onClick={() =>
+          setFruits(prev => prev.filter(fruit => fruit !== "Apple"))
+        }
+      >
+        Remove Apple
+      </button>
+
+      {/* Update item */}
+      <button
+        onClick={() =>
+          setFruits(prev =>
+            prev.map(fruit =>
+              fruit === "Banana" ? "Orange" : fruit
+            )
+          )
+        }
+      >
+        Replace Banana → Orange
+      </button>
+
+      {/* Clear array */}
+      <button onClick={() => setFruits([])}>
+        Clear Fruits
+      </button>
+
+      <hr />
+
+      <h2>👤 Users (Array of Objects)</h2>
+
+      {/* Display users */}
+      <ul>
+        {users.map(user => (
+          <li key={user.id}>
+            {user.id} - {user.name}
+          </li>
+        ))}
+      </ul>
+
+      {/* Add user */}
+      <button
+        onClick={() =>
+          setUsers(prev => [
+            ...prev,
+            { id: 3, name: "Ahmed" }
+          ])
+        }
+      >
+        Add User
+      </button>
+
+      {/* Update user */}
+      <button
+        onClick={() =>
+          setUsers(prev =>
+            prev.map(user =>
+              user.id === 1
+                ? { ...user, name: "Musaib" }
+                : user
+            )
+          )
+        }
+      >
+        Update Musab → Musaib
+      </button>
+
+      {/* Remove user */}
+      <button
+        onClick={() =>
+          setUsers(prev =>
+            prev.filter(user => user.id !== 2)
+          )
+        }
+      >
+        Remove Ali
+      </button>
+    </div>
+  );
+}
+

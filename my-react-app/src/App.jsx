@@ -6,6 +6,7 @@ import { UserGreeting, Props } from "./props.jsx";
 import {Button1, Football, Football1} from './button.jsx'
 import {Counter,NameInput,Toggle,list,User} from './useState.jsx'
 import onChange from './onChange.jsx';
+import UpdateCounter from './updaterFunc.jsx';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
       {Fruit.length>0 && <List items = {Fruit} category ="Fruit" />}
       {veg.length>0 &&<List items = {veg}  category = "veg"/>}
       <Button1></Button1>
+      <UpdateCounter />
       <Football />
       <Football1 />
       <Props />

@@ -14,6 +14,30 @@ function ToDo(){
        const updatedTasks =  tasks.filter((_, i) => i !== id)
        setTask(updatedTasks);
     }
+    function moveUp(index){
+        const copy = [...tasks];
+        if(index !== 0){
+            let temp = copy[index];
+            copy[index] = copy[index - 1];
+            copy[index - 1] = temp;
+
+            setTask(copy);
+        }
+        }
+
+    function moveDown(index){
+            
+        const copy = [...tasks];
+        const lastIndex = copy.length - 1;
+        if(index !== lastIndex){
+            let temp = copy[index];
+            copy[index] = copy[index + 1];
+            copy[index + 1] = temp;
+
+            setTask(copy);
+        }
+        
+    }
 
 
     return(
@@ -28,7 +52,7 @@ function ToDo(){
             <ol>
                 {
                     tasks.map((task,index)=>(
-                        <li key={index}>{task} <button onClick= {() =>delTask(index)}>del</button></li>
+                        <li key={index}>{task} <button onClick= {() =>delTask(index)}>del</button> <button onClick= {() =>moveUp(index)}>Up</button> <button onClick= {() =>moveDown(index)}>down</button></li>
                     ))
                 }
             </ol>

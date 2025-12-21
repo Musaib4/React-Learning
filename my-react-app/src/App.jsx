@@ -8,6 +8,7 @@
 // import onChange from './onChange.jsx';
 // import {UpdateArray,UpdateCounter,Profile} from './updaterFunc.jsx';
 import ToDo from './todo.jsx';
+import Users from './useEffect.jsx';
 
 
 function App() {
@@ -40,7 +41,7 @@ function App() {
       <Card></Card>
       <Footer></Footer> */ }
 
-      <ToDo/>
+    <Users/>
     </>
   )
 }

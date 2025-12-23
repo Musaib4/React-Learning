@@ -9,7 +9,7 @@
 // import {UpdateArray,UpdateCounter,Profile} from './updaterFunc.jsx';
 import ToDo from './todo.jsx';
 import Users from './useEffect.jsx';
-
+import Check from './useContext.jsx';
 
 function App() {
 
@@ -40,6 +40,7 @@ function App() {
       <Props />
       <Card></Card>
       <Footer></Footer> */ }
+      <Check/>
 
     <Users/>
     </>

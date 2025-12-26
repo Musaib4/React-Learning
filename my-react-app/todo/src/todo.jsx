@@ -6,9 +6,14 @@ function Todo(){
     const [editIndex, setEditIndex] = useState(null);
     const [showCompleted, setShowCompleted] = useState(false);
     const inputRef = useRef(null);
+    const lastTodoRef = useRef(null);
+
     
     
 
+    useEffect(() => {
+        lastTodoRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [todos]);
 
 
     
@@ -82,7 +87,9 @@ function Todo(){
                     todos
                         .filter(todo => (showCompleted ? todo.completed : true))
                         .map((todo, index) => (
-                        <p key={index} className={todo.completed ? "done" : ""}>
+                        <p key={index} 
+                        ref={index === todos.length - 1 ? lastTodoRef : null}
+                        className={todo.completed ? "done" : ""}>
                             {index}. 
                         {todo.text} 
                         <button className="del" onClick={()=> delTodo(index)} >del</button>

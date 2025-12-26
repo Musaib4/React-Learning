@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useState,useRef,useEffect } from "react";
 import './index.css'
 function Todo(){
     const [todos, setTodos] = useState([])
     const [inputValue, setInputValue] = useState("")
     const [editIndex, setEditIndex] = useState(null);
     const [showCompleted, setShowCompleted] = useState(false);
+    const inputRef = useRef(null);
+    
+    
+
 
 
     
@@ -12,7 +16,10 @@ function Todo(){
     function addTodo(){
         setShowCompleted(false);
 
-        if (inputValue.trim() === "") return;
+        inputRef.current?.focus();
+
+        if (inputValue.trim() === "")
+            return;
 
         if (editIndex !== null) {
         // SAVE UPDATED TODO
@@ -39,6 +46,7 @@ function Todo(){
     }
 
     function updateTodo(index){
+        inputRef.current?.focus();
         setInputValue(todos[index].text);
         setEditIndex(index);
     }
@@ -60,13 +68,13 @@ function Todo(){
         <div className="container">
 
             <div>
-                <input className="inputvalue" type="text"  placeholder="enter your todo here"
+                <input className="inputvalue" ref={inputRef} type="text"  placeholder="enter your todo here"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                 />
                 <button className="add" onClick={addTodo}>Add Todo</button>
                 <button className="delall" onClick={delAllTodo}>delete all</button>
-                <button className="add" onClick={() => setShowCompleted(!showCompleted)} >Completed</button>
+                <button className="add"  onClick={() => {setShowCompleted(!showCompleted)}} >Completed</button>
             </div>
 
             <div className="show">

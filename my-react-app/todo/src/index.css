@@ -117,3 +117,8 @@ body {
 button:active {
   transform: scale(0.95);
 }
+
+.done {
+  text-decoration: line-through;
+  color: gray;
+}

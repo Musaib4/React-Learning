@@ -4,22 +4,26 @@ function Todo(){
     const [todos, setTodos] = useState([])
     const [inputValue, setInputValue] = useState("")
     const [editIndex, setEditIndex] = useState(null);
+    const [showCompleted, setShowCompleted] = useState(false);
+
 
     
 
     function addTodo(){
+        setShowCompleted(false);
+
         if (inputValue.trim() === "") return;
 
         if (editIndex !== null) {
         // SAVE UPDATED TODO
         const updatedTodos = todos.map((todo, i) =>
-            i === editIndex ? inputValue : todo
+           i === editIndex ? { ...todo, text: inputValue } : todo
         );
         setTodos(updatedTodos);
         setEditIndex(null);
         } else {
         // ADD NEW TODO
-        setTodos(v => [...v, inputValue]);
+        setTodos(v => [...v, { text: inputValue, completed: false }]);
         }
 
     setInputValue("");
@@ -35,9 +39,19 @@ function Todo(){
     }
 
     function updateTodo(index){
-        setInputValue(todos[index]);
+        setInputValue(todos[index].text);
         setEditIndex(index);
     }
+
+
+
+    function toggleComplete(index) {
+        const updatedTodos = todos.map((todo, i) =>
+            i === index ? { ...todo, completed: !todo.completed } : todo
+        );
+        setTodos(updatedTodos);
+    }
+
 
 
 
@@ -52,16 +66,25 @@ function Todo(){
                 />
                 <button className="add" onClick={addTodo}>Add Todo</button>
                 <button className="delall" onClick={delAllTodo}>delete all</button>
+                <button className="add" onClick={() => setShowCompleted(!showCompleted)} >Completed</button>
             </div>
 
             <div className="show">
                 {
-                    todos.map((todo,index)=>(
-                        <p key={index}>
+                    todos
+                        .filter(todo => (showCompleted ? todo.completed : true))
+                        .map((todo, index) => (
+                        <p key={index} className={todo.completed ? "done" : ""}>
                             {index}. 
-                            {todo} 
+                        {todo.text} 
                         <button className="del" onClick={()=> delTodo(index)} >del</button>
                         <button className="upd" onClick={() => updateTodo(index)}>upd</button>
+                        <input
+                            type="checkbox"
+                            checked={todo.completed}
+                            onChange={() => toggleComplete(index)}
+                            />
+                           
                         </p>
                     ))
                 }

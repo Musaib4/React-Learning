@@ -1,7 +1,11 @@
 import { useState,useRef,useEffect } from "react";
 import './index.css'
 function Todo(){
-    const [todos, setTodos] = useState([])
+    const [todos, setTodos] = useState(() => {
+        const storedTodos = JSON.parse(localStorage.getItem("todos"));
+        return Array.isArray(storedTodos) ? storedTodos : [];
+    });
+
     const [inputValue, setInputValue] = useState("")
     const [editIndex, setEditIndex] = useState(null);
     const [showCompleted, setShowCompleted] = useState(false);
@@ -9,11 +13,16 @@ function Todo(){
     const lastTodoRef = useRef(null);
 
     
-    
-
     useEffect(() => {
+        localStorage.setItem("todos", JSON.stringify(todos));
         lastTodoRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [todos]);
+    
+    
+
+
+    
+    
 
 
     
@@ -37,6 +46,8 @@ function Todo(){
         // ADD NEW TODO
         setTodos(v => [...v, { text: inputValue, completed: false }]);
         }
+
+        
 
     setInputValue("");
     }

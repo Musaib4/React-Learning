@@ -1,6 +1,21 @@
-import { useState,useRef,useEffect } from "react";
+import { useState,useRef,useEffect,useContext } from "react";
 import './index.css'
-function Todo(){
+import {ThemeContext} from "./theme";
+
+export function Home() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  return (
+    <div>
+      <h2>Theme is {theme}</h2>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+    </div>
+  );
+}
+
+
+
+export function Todo(){
     const [todos, setTodos] = useState(() => {
         const storedTodos = JSON.parse(localStorage.getItem("todos"));
         return Array.isArray(storedTodos) ? storedTodos : [];
@@ -18,14 +33,7 @@ function Todo(){
         lastTodoRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [todos]);
     
-    
-
-
-    
-    
-
-
-    
+       
 
     function addTodo(){
         setShowCompleted(false);
@@ -84,6 +92,7 @@ function Todo(){
         <div className="container">
 
             <div>
+                
                 <input className="inputvalue" ref={inputRef} type="text"  placeholder="enter your todo here"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
@@ -120,4 +129,3 @@ function Todo(){
     )
 }
 
-export default Todo;

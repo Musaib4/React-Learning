@@ -9,9 +9,9 @@ function App() {
   return (
     <>
     <Theme>
-      <Home />
-    </Theme>
       <Todo/>
+    </Theme>
+      
     </>
   )
 }

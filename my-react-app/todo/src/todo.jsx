@@ -3,14 +3,7 @@ import './index.css'
 import {ThemeContext} from "./theme";
 
 export function Home() {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-
-  return (
-    <div>
-      <h2>Theme is {theme}</h2>
-      <button onClick={toggleTheme}>Toggle Theme</button>
-    </div>
-  );
+  
 }
 
 
@@ -26,6 +19,11 @@ export function Todo(){
     const [showCompleted, setShowCompleted] = useState(false);
     const inputRef = useRef(null);
     const lastTodoRef = useRef(null);
+    const { theme, toggletheme } = useContext(ThemeContext);
+
+    console.log(theme, toggletheme);
+
+    
 
     
     useEffect(() => {
@@ -89,40 +87,46 @@ export function Todo(){
 
     return(
         <>
-        <div className="container">
-
+        <div className={theme}>
             <div>
-                
-                <input className="inputvalue" ref={inputRef} type="text"  placeholder="enter your todo here"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                />
-                <button className="add" onClick={addTodo}>Add Todo</button>
-                <button className="delall" onClick={delAllTodo}>delete all</button>
-                <button className="add"  onClick={() => {setShowCompleted(!showCompleted)}} >Completed</button>
+                <h2>Theme is {theme}</h2>
+                <button onClick={toggletheme}>Toggle Theme</button>
             </div>
+            <div  className="container" >
 
-            <div className="show">
-                {
-                    todos
-                        .filter(todo => (showCompleted ? todo.completed : true))
-                        .map((todo, index) => (
-                        <p key={index} 
-                        ref={index === todos.length - 1 ? lastTodoRef : null}
-                        className={todo.completed ? "done" : ""}>
-                            {index}. 
-                        {todo.text} 
-                        <button className="del" onClick={()=> delTodo(index)} >del</button>
-                        <button className="upd" onClick={() => updateTodo(index)}>upd</button>
-                        <input
-                            type="checkbox"
-                            checked={todo.completed}
-                            onChange={() => toggleComplete(index)}
-                            />
-                           
-                        </p>
-                    ))
-                }
+                <div>
+                    
+                    <input className="inputvalue" ref={inputRef} type="text"  placeholder="enter your todo here"
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                    />
+                    <button className="add" onClick={addTodo}>Add Todo</button>
+                    <button className="delall" onClick={delAllTodo}>delete all</button>
+                    <button className="add"  onClick={() => {setShowCompleted(!showCompleted)}} >Completed</button>
+                </div>
+
+                <div className="show">
+                    {
+                        todos
+                            .filter(todo => (showCompleted ? todo.completed : true))
+                            .map((todo, index) => (
+                            <p key={index} 
+                            ref={index === todos.length - 1 ? lastTodoRef : null}
+                            className={todo.completed ? "done" : ""}>
+                                {index}. 
+                            {todo.text} 
+                            <button className="del" onClick={()=> delTodo(index)} >del</button>
+                            <button className="upd" onClick={() => updateTodo(index)}>upd</button>
+                            <input
+                                type="checkbox"
+                                checked={todo.completed}
+                                onChange={() => toggleComplete(index)}
+                                />
+                            
+                            </p>
+                        ))
+                    }
+                </div>
             </div>
         </div>
         </>

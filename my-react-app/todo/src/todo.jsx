@@ -21,8 +21,6 @@ export function Todo(){
     const lastTodoRef = useRef(null);
     const { theme, toggletheme } = useContext(ThemeContext);
 
-    console.log(theme, toggletheme);
-
     
 
     

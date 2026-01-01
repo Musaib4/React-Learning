@@ -2,9 +2,7 @@ import { useState,useRef,useEffect,useContext } from "react";
 import './index.css'
 import {ThemeContext} from "./theme";
 
-export function Home() {
-  
-}
+
 
 
 

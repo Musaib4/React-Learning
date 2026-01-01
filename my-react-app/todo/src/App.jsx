@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import {Todo,Home} from './todo'
+import {Todo} from './todo'
 import {Theme} from "./theme";
+import ApiFetch from './api';
 
 import './App.css'
 
@@ -11,6 +12,8 @@ function App() {
     <Theme>
       <Todo/>
     </Theme>
+
+    <ApiFetch/>
       
     </>
   )

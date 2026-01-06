@@ -7,10 +7,8 @@ import {ThemeContext} from "./theme";
 
 
 export function Todo(){
-    const [todos, setTodos] = useState(() => {
-        const storedTodos = JSON.parse(localStorage.getItem("todos"));
-        return Array.isArray(storedTodos) ? storedTodos : [];
-    });
+    const [loading, setLoading] = useState(true);
+    const [todos, setTodos] = useState([])
 
     const [inputValue, setInputValue] = useState("")
     const [editIndex, setEditIndex] = useState(null);
@@ -19,15 +17,23 @@ export function Todo(){
     const lastTodoRef = useRef(null);
     const { theme, toggletheme } = useContext(ThemeContext);
 
+    useEffect(() => {
+        const storedTodos = JSON.parse(localStorage.getItem("todos"));
+        setTodos(Array.isArray(storedTodos) ? storedTodos : []);
+        setLoading(false); // ✅ correct place
+    }, []);
+
+
     
 
     
     useEffect(() => {
-        localStorage.setItem("todos", JSON.stringify(todos));
-        lastTodoRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, [todos]);
+        if (!loading) {
+            localStorage.setItem("todos", JSON.stringify(todos));
+            lastTodoRef.current?.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [todos,loading]);
     
-       
 
     function addTodo(){
         setShowCompleted(false);
@@ -59,6 +65,17 @@ export function Todo(){
         setTodos(newTodo)
     }
 
+    function TodoSkeleton() {
+        return (
+            <div className="skeleton">
+            <div className="skeleton-line"></div>
+            <div className="skeleton-line short"></div>
+            <div className="skeleton-line"></div>
+            </div>
+        );
+    }
+
+
     function delAllTodo(){
         setTodos([])
     }
@@ -77,6 +94,11 @@ export function Todo(){
         );
         setTodos(updatedTodos);
     }
+
+    if (loading) {
+     return <TodoSkeleton />;
+    }
+
 
 
 

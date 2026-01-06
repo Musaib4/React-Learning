@@ -178,3 +178,12 @@ button:active {
     background-position: -100% 0;
   }
 }
+
+
+.error {
+  padding: 20px;
+  color: #b00020;
+  background: #ffe6e6;
+  border-radius: 8px;
+  text-align: center;
+}

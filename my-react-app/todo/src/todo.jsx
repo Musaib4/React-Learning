@@ -2,12 +2,21 @@ import { useState,useRef,useEffect,useContext } from "react";
 import './index.css'
 import {ThemeContext} from "./theme";
 
-
+function TodoSkeleton() {
+        return (
+            <div className="skeleton">
+            <div className="skeleton-line"></div>
+            <div className="skeleton-line short"></div>
+            <div className="skeleton-line"></div>
+            </div>
+        );
+    }
 
 
 
 export function Todo(){
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null)
     const [todos, setTodos] = useState([])
 
     const [inputValue, setInputValue] = useState("")
@@ -18,10 +27,26 @@ export function Todo(){
     const { theme, toggletheme } = useContext(ThemeContext);
 
     useEffect(() => {
-        const storedTodos = JSON.parse(localStorage.getItem("todos"));
-        setTodos(Array.isArray(storedTodos) ? storedTodos : []);
-        setLoading(false); // ✅ correct place
+        const timer = setTimeout(() => {
+            try {
+            const storedTodos = JSON.parse(localStorage.getItem("todos"));
+
+            if (storedTodos && !Array.isArray(storedTodos)) {
+                throw new Error("Invalid todo data");
+            }
+
+            setTodos(Array.isArray(storedTodos) ? storedTodos : []);
+            } catch (err) {
+            setError("Failed to load todos");
+            } finally {
+            setLoading(false);
+            }
+        }, 2000);
+
+        return () => clearTimeout(timer);
     }, []);
+
+
 
 
     
@@ -65,15 +90,6 @@ export function Todo(){
         setTodos(newTodo)
     }
 
-    function TodoSkeleton() {
-        return (
-            <div className="skeleton">
-            <div className="skeleton-line"></div>
-            <div className="skeleton-line short"></div>
-            <div className="skeleton-line"></div>
-            </div>
-        );
-    }
 
 
     function delAllTodo(){
@@ -97,6 +113,17 @@ export function Todo(){
 
     if (loading) {
      return <TodoSkeleton />;
+    }
+
+    if (error) {
+        return (
+            <div className="error">
+            <h3>❌ {error}</h3>
+            <button onClick={() => window.location.reload()}>
+                Retry
+            </button>
+            </div>
+        );
     }
 
 

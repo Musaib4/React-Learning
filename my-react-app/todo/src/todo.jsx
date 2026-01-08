@@ -18,13 +18,13 @@ export function Todo(){
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null)
     const [todos, setTodos] = useState([])
-
     const [inputValue, setInputValue] = useState("")
     const [editIndex, setEditIndex] = useState(null);
     const [showCompleted, setShowCompleted] = useState(false);
     const inputRef = useRef(null);
     const lastTodoRef = useRef(null);
     const { theme, toggletheme } = useContext(ThemeContext);
+    const [search, SetSearch] = useState("")
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -47,6 +47,16 @@ export function Todo(){
     }, []);
 
 
+
+    const filteredTodos = todos.filter(todo => {
+        const matchesSearch = todo.text
+            .toLowerCase()
+            .includes(search.toLowerCase());
+
+        const matchesCompleted = showCompleted ? todo.completed : true;
+
+        return matchesSearch && matchesCompleted;
+    });
 
 
     
@@ -102,6 +112,10 @@ export function Todo(){
         setEditIndex(index);
     }
 
+    function SearchTodo(){
+
+    }
+
 
 
     function toggleComplete(index) {
@@ -140,6 +154,13 @@ export function Todo(){
             <div  className="container" >
 
                 <div>
+
+                    <div className="flex">
+                        <input className="inputvalue" type="text"  placeholder="Search your todo here"
+                            value={search}
+                            onChange={(e) => SetSearch(e.target.value)}
+                        />
+                    </div>
                     
                     <input className="inputvalue" ref={inputRef} type="text"  placeholder="enter your todo here"
                         value={inputValue}
@@ -151,27 +172,26 @@ export function Todo(){
                 </div>
 
                 <div className="show">
-                    {
-                        todos
-                            .filter(todo => (showCompleted ? todo.completed : true))
-                            .map((todo, index) => (
-                            <p key={index} 
-                            ref={index === todos.length - 1 ? lastTodoRef : null}
-                            className={todo.completed ? "done" : ""}>
-                                {index}. 
-                            {todo.text} 
-                            <button className="del" onClick={()=> delTodo(index)} >del</button>
-                            <button className="upd" onClick={() => updateTodo(index)}>upd</button>
-                            <input
-                                type="checkbox"
-                                checked={todo.completed}
-                                onChange={() => toggleComplete(index)}
-                                />
-                            
-                            </p>
-                        ))
-                    }
+    {
+        filteredTodos.map((todo, index) => (
+            <p
+                key={index}
+                ref={index === filteredTodos.length - 1 ? lastTodoRef : null}
+                className={todo.completed ? "done" : ""}
+            >
+                {index}. {todo.text}
+                <button className="del" onClick={() => delTodo(index)}>del</button>
+                <button className="upd" onClick={() => updateTodo(index)}>upd</button>
+                <input
+                    type="checkbox"
+                    checked={todo.completed}
+                    onChange={() => toggleComplete(index)}
+                />
+            </p>
+        ))
+    }
                 </div>
+
             </div>
         </div>
         </>

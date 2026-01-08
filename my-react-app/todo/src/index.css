@@ -187,3 +187,12 @@ button:active {
   border-radius: 8px;
   text-align: center;
 }
+
+.flex{
+  display: flex;
+}
+
+.search{
+  margin-left: 1vw;
+  display: flex;
+}

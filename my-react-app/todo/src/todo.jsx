@@ -2,6 +2,7 @@ import { useState,useRef,useEffect,useContext } from "react";
 import './index.css'
 import {ThemeContext} from "./context/theme.jsx";
 
+
 function TodoSkeleton() {
         return (
             <div className="skeleton">
@@ -196,5 +197,7 @@ export function Todo(){
         </div>
         </>
     )
+
+
 }
 

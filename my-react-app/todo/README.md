@@ -58,19 +58,19 @@ This project was built following a **structured React learning roadmap**, progre
 
 ## 📁 Folder Structure
 
-src/
-├── context/
-│   ├── theme.jsx
-│   └── apiContext.jsx
-├── services/
-│   └── api.jsx
-├── todo.jsx
-├── App.jsx
-├── main.jsx
-└── index.css
+| Path | Description |
+|------|------------|
+| `src/` | Root source directory |
+| `src/context/` | Global state management using Context API |
+| `src/context/theme.jsx` | Theme (Light/Dark) context provider |
+| `src/context/apiContext.jsx` | API & product data context |
+| `src/services/` | API service layer |
+| `src/services/api.jsx` | API fetch logic |
+| `src/todo.jsx` | Main Todo component (CRUD, search, filter) |
+| `src/App.jsx` | Root application component |
+| `src/main.jsx` | Application entry point |
+| `src/index.css` | Global application styles |
 
-
----
 
 ## 🧩 Application Flow
 

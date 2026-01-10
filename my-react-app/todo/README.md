@@ -60,17 +60,15 @@ This project was built following a **structured React learning roadmap**, progre
 
 src/
 ├── context/
-│ ├── theme.jsx
-│ └── apiContext.jsx
+│   ├── theme.jsx
+│   └── apiContext.jsx
 ├── services/
-│ └── api.jsx
+│   └── api.jsx
 ├── todo.jsx
 ├── App.jsx
 ├── main.jsx
 └── index.css
 
-yaml
-Copy code
 
 ---
 

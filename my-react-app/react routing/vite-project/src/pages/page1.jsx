@@ -1,0 +1,14 @@
+import react from 'react'
+
+function Page1() {
+
+  return (
+    <>
+      <div>
+        <h1>this is page1</h1>
+      </div>
+        </>
+  )
+}
+
+export default Page1

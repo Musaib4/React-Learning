@@ -1,18 +1,15 @@
 import react from 'react'
+import { Link } from "react-router-dom";
+
 
 function Navbar() {
 
   return (
     <>
       <div>
-        <img src="" alt="" />
-        <ul>
-            <li>page1</li>
-            <li>page2</li>
-            <li>page3</li>
-        </ul>
-        <button>get started</button>
-      </div>
+      <Link to="/">Home</Link>
+      <Link to="/page1">page1</Link>
+    </div>
     </>
   )
 }
